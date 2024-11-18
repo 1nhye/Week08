@@ -12,5 +12,7 @@
 1. 레포 이름은 Week08
 2. pytorch_i3d.py
 3. train.py 돌아가고 있는 사진 캡쳐, 사진 이름은 train.png
-
-Week08/ ├── pytorch_i3d.py└── train.png
+   
+📂 Week08
+├── pytorch_i3d.py
+└── train.png        # train.py 실행 캡처 이미지
