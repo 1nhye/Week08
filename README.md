@@ -5,7 +5,7 @@
 2. 모델 학습
 
 ## 과제 방법
-1. git clone https://github.com/1nhye/Week08
+1. git clone https://github.com/1nhye/Week08 (살짝 오래 걸릴지도)
 2. TODO 채우기
 
 ## 과제 제출
