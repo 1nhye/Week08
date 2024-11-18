@@ -9,6 +9,7 @@
 2. TODO 채우기
 
 ## 과제 제출
-1. 모델 구현 파일
-2. train.py 돌아가고 있는 사진 캡쳐, 사진 이름은 train.png
+1. 레포 이름은 Week08
+2. pytorch_i3d.py
+3. train.py 돌아가고 있는 사진 캡쳐, 사진 이름은 train.png
 
