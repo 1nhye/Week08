@@ -61,8 +61,8 @@ def setup_ucf101(data_dir, annot_dir):
     print(f"  - Extract UCF101TrainTestSplits.zip into: {annot_dir}")
 
 # Set up directories
-DATA_DIR = "./data/UCF101"
-ANNOT_DIR = "./data/ucf101_annot"
+DATA_DIR = "./data"
+ANNOT_DIR = "./data"
 
 # Run the setup
 setup_ucf101(DATA_DIR, ANNOT_DIR)

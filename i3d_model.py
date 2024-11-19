@@ -7,7 +7,6 @@ import numpy as np
 
 import os
 import sys
-from collections import OrderedDict
 
 
 class MaxPool3dSamePadding(nn.MaxPool3d):
@@ -87,17 +86,13 @@ class Unit3D(nn.Module):
 
             
     def forward(self, x):
-        # compute 'same' padding
         (batch, channel, t, h, w) = x.size()
-        #print t,h,w
         out_t = np.ceil(float(t) / float(self._stride[0]))
         out_h = np.ceil(float(h) / float(self._stride[1]))
         out_w = np.ceil(float(w) / float(self._stride[2]))
-        #print out_t, out_h, out_w
         pad_t = self.compute_pad(0, t)
         pad_h = self.compute_pad(1, h)
         pad_w = self.compute_pad(2, w)
-        #print pad_t, pad_h, pad_w
 
         pad_t_f = pad_t // 2
         pad_t_b = pad_t - pad_t_f
@@ -107,16 +102,15 @@ class Unit3D(nn.Module):
         pad_w_b = pad_w - pad_w_f
 
         pad = (pad_w_f, pad_w_b, pad_h_f, pad_h_b, pad_t_f, pad_t_b)
-        #print x.size()
-        #print pad
-        x = F.pad(x, pad)
-        #print x.size()        
 
-        x = self.conv3d(x)
+        x = F.pad(x, pad)       
+
+        
+        x = #TODO
         if self._use_batch_norm:
-            x = self.bn(x)
+            x = #TODO
         if self._activation_fn is not None:
-            x = self._activation_fn(x)
+            x = #TODO
         return x
 
 
@@ -142,10 +136,7 @@ class InceptionModule(nn.Module):
         self.name = name
 
     def forward(self, x):    
-        b0 = self.b0(x)
-        b1 = self.b1b(self.b1a(x))
-        b2 = self.b2b(self.b2a(x))
-        b3 = self.b3b(self.b3a(x))
+        #TODO
         return torch.cat([b0,b1,b2,b3], dim=1)
 
 
@@ -188,22 +179,6 @@ class InceptionI3d(nn.Module):
 
     def __init__(self, num_classes=400, spatial_squeeze=True,
                  final_endpoint='Logits', name='inception_i3d', in_channels=3, dropout_keep_prob=0.5):
-        """Initializes I3D model instance.
-        Args:
-          num_classes: The number of outputs in the logit layer (default 400, which
-              matches the Kinetics dataset).
-          spatial_squeeze: Whether to squeeze the spatial dimensions for the logits
-              before returning (default True).
-          final_endpoint: The model contains many possible endpoints.
-              `final_endpoint` specifies the last endpoint for the model to be built
-              up to. In addition to the output at `final_endpoint`, all the outputs
-              at endpoints up to `final_endpoint` will also be returned, in a
-              dictionary. `final_endpoint` must be one of
-              InceptionI3d.VALID_ENDPOINTS (default 'Logits').
-          name: A string (optional). The name of this module.
-        Raises:
-          ValueError: if `final_endpoint` is not recognized.
-        """
 
         if final_endpoint not in self.VALID_ENDPOINTS:
             raise ValueError('Unknown final endpoint %s' % final_endpoint)
@@ -290,12 +265,12 @@ class InceptionI3d(nn.Module):
         if self._final_endpoint == end_point: return
 
         end_point = 'Logits'
-        self.avg_pool = nn.AvgPool3d(kernel_size=[2, 7, 7],
-                                     stride=(1, 1, 1))
+        self.avg_pool = nn.AdaptiveAvgPool3d(output_size=(1, 1, 1))
         self.dropout = nn.Dropout(dropout_keep_prob)
-        self.logits = Unit3D(in_channels=384+384+128+128, output_channels=self._num_classes,
-                             kernel_shape=[1, 1, 1],
-                             padding=0,
+        #TODO
+        self.logits = Unit3D(in_channels=TODO, output_channels=TODO,
+                             kernel_shape=TODO,
+                             padding=TODO,
                              activation_fn=None,
                              use_batch_norm=False,
                              use_bias=True,
@@ -317,12 +292,12 @@ class InceptionI3d(nn.Module):
     
     def build(self):
         for k in self.end_points.keys():
-            self.add_module(k, self.end_points[k])
+            self.add_module(k, #TODO)
         
     def forward(self, x):
         for end_point in self.VALID_ENDPOINTS:
             if end_point in self.end_points:
-                x = self._modules[end_point](x) # use _modules to work with dataparallel
+                x = #TODO
 
         x = self.logits(self.dropout(self.avg_pool(x)))
         if self._spatial_squeeze:

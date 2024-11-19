@@ -1,6 +1,7 @@
 import torch
 from torch import optim
 from torch.nn import CrossEntropyLoss
+from torch.quantization import quantize_dynamic
 
 from i3d_model import InceptionI3d
 from dataset_loader import get_dataloaders
@@ -31,9 +32,17 @@ def main():
         print(f"Train Loss: {train_loss:.4f}, Train Accuracy: {train_accuracy:.2f}%")
         print(f"Validation Loss: {val_loss:.4f}, Validation Accuracy: {val_accuracy:.2f}%")
 
-    # Save the model
-    torch.save(model.state_dict(), "i3d_model.pth")
-    print("Model saved as i3d_model.pth")
+    # Dynamic Quantization
+    quantized_model = quantize_dynamic(
+        model,  # 모델
+        {torch.nn.Conv3d, torch.nn.Linear},  # 양자화할 레이어
+        dtype=torch.qint8  # 8비트 정수
+    )
+    print("Model quantized to 8-bit.")
+
+    # Save the quantized model
+    torch.save(quantized_model.state_dict(), "i3d_model.pth")
+    print("Quantized model saved as i3d_model.pth")
 
 if __name__ == "__main__":
     main()
