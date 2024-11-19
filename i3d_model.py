@@ -103,7 +103,7 @@ class Unit3D(nn.Module):
 
         pad = (pad_w_f, pad_w_b, pad_h_f, pad_h_b, pad_t_f, pad_t_b)
 
-        x = F.pad(x, pad)       
+        x = #TODO     
 
         
         x = #TODO
@@ -299,7 +299,7 @@ class InceptionI3d(nn.Module):
             if end_point in self.end_points:
                 x = #TODO
 
-        x = self.logits(self.dropout(self.avg_pool(x)))
+        x = #TODO
         if self._spatial_squeeze:
             logits = x.squeeze(3).squeeze(3)
         # logits is batch X time X classes, which is what we want to work with
