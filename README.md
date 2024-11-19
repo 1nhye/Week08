@@ -14,7 +14,7 @@ I3D 구현 + UCF101으로 학습
 
 ## 과제 제출
 1. 레포 이름은 Week08
-2. TODO 채운 pytorch_i3d.py
+2. TODO 채운 i3d_model.py
 3. train.py 돌아가고 있는 사진 캡쳐, 사진 이름은 train.png
 ```
 📂 Week08
