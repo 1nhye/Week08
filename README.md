@@ -1,4 +1,4 @@
-# Week08
+# Week09
 I3D 구현 + UCF101으로 학습
 
 ## 과제 세부사항
@@ -13,11 +13,11 @@ I3D 구현 + UCF101으로 학습
 5. i3d_model.py TODO 채우기
 
 ## 과제 제출
-1. 레포 이름은 Week08
+1. 레포 이름은 Week09
 2. TODO 채운 i3d_model.py
 3. train.py 돌아가고 있는 사진 캡쳐, 사진 이름은 train.png
 ```
-📂 Week08
+📂 Week09
 ├── i3d_model.py
 └── train.png        # train.py 캡처 이미지
 ```
